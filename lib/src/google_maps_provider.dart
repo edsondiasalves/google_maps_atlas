@@ -24,7 +24,7 @@ class _GoogleMapsProviderState extends State<GoogleMapsProvider> {
           widget.initialCameraPosition.target.latitude,
           widget.initialCameraPosition.target.longitude,
         ),
-        zoom: 14.4746,
+        zoom: widget.initialCameraPosition.zoom,
       ),
       onMapCreated: (GoogleMapController controller) {
         _controller.complete(controller);

@@ -1,5 +1,5 @@
 import 'package:atlas/atlas.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 
 import 'google_maps_provider.dart';
 

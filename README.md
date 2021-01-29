@@ -6,9 +6,14 @@
 * `git clone https://github.com/edsondiasalves/google_maps_atlas.git`
 ### Enter in the root directory: 
 - `cd google_maps_atlas`
-### Download the dependencies:
+### Download the root dependencies:
 * `flutter pub get`
-### Set the credencials
+* ### Enter in the example project:
+* `cd example`
+### Download the example dependencies:
+* `flutter pub get`
+### Set the credentials
+#### For getting you API Key sign up to the [Google Cloud](https://cloud.google.com/)
 #### Ios:
 > In the `ios/Runner/AppDelegate.swift` file change the highlighted value
 ```
@@ -29,4 +34,4 @@ GMSServices.provideAPIKey("[PUT YOUR API KEY HERE]")
 
 ```
 ### Run the project:
-* `flutter run lib/src/main.dart`
+* `flutter run lib/main.dart`

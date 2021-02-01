@@ -13,7 +13,7 @@
 ### Download the example dependencies:
 * `flutter pub get`
 ### Set the credentials
-#### For getting you API Key sign up to the [Google Cloud](https://cloud.google.com/)
+#### For getting your API Key sign up to the [Google Cloud](https://cloud.google.com/)
 #### Ios:
 > In the `ios/Runner/AppDelegate.swift` file change the highlighted value
 ```

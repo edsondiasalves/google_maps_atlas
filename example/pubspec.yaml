@@ -10,14 +10,15 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
+  atlas: 0.12.2
+  flutter_bloc: ^6.1.1
+  equatable: ^1.2.5
+  google_maps_atlas:
+    path: ../
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  atlas: 0.12.2
-  flutter_bloc: ^6.1.1
-  google_maps_atlas:
-    path: ../
 
 flutter:
   uses-material-design: true

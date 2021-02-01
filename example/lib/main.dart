@@ -18,37 +18,39 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: BlocProvider(
         create: (BuildContext context) => ConfigurationBloc(),
-        child: GoogleAtlasSample(key: UniqueKey()),
+        child: GoogleAtlasSample(),
       ),
     );
   }
 }
 
 class GoogleAtlasSample extends StatelessWidget {
-  const GoogleAtlasSample({@required Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ConfigurationBloc, ConfigurationState>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Flutter Google Maps Provider'),
-          ),
-          drawer: SettingsSideMenu(),
-          body: BlocBuilder<ConfigurationBloc, ConfigurationState>(
-            builder: (context, state) {
-              return Atlas(
-                key: UniqueKey(),
-                initialCameraPosition: CameraPosition(
-                  target: getCityCoordinates(state.city),
-                  zoom: 13,
-                ),
-              );
-            },
-          ),
-        );
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Flutter Google Maps Provider'),
+      ),
+      drawer: SettingsSideMenu(),
+      body: BlocListener<ConfigurationBloc, ConfigurationState>(
+        listener: (context, state) {
+          if (state is CameraChangedState) {
+            print(state.currentPosition);
+          }
+        },
+        child: BlocBuilder<ConfigurationBloc, ConfigurationState>(
+          buildWhen: (previous, current) => current is InitialPositionState,
+          builder: (context, state) {
+            return Atlas(
+              key: UniqueKey(),
+              initialCameraPosition: CameraPosition(
+                target: getCityCoordinates(state.initialPosition),
+                zoom: 13,
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 

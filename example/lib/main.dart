@@ -2,10 +2,10 @@ import 'package:atlas/atlas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_atlas/google_atlas.dart';
-import 'package:google_maps_atlas_example/utils/constants.dart';
 import 'package:google_maps_atlas_example/widgets/settings_side_menu.dart';
 
 import 'bloc/configuration_bloc.dart';
+import 'utils/extensions.dart';
 
 void main() {
   AtlasProvider.instance = GoogleAtlas();
@@ -27,6 +27,8 @@ class MyApp extends StatelessWidget {
 class GoogleAtlasSample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AtlasController _atlasController;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter Google Maps Provider'),
@@ -35,7 +37,9 @@ class GoogleAtlasSample extends StatelessWidget {
       body: BlocListener<ConfigurationBloc, ConfigurationState>(
         listener: (context, state) {
           if (state is CameraChangedState) {
-            print(state.currentPosition);
+            _atlasController.moveCamera(
+              state.currentPosition.toCameraPosition(),
+            );
           }
         },
         child: BlocBuilder<ConfigurationBloc, ConfigurationState>(
@@ -43,31 +47,14 @@ class GoogleAtlasSample extends StatelessWidget {
           builder: (context, state) {
             return Atlas(
               key: UniqueKey(),
-              initialCameraPosition: CameraPosition(
-                target: getCityCoordinates(state.initialPosition),
-                zoom: 13,
-              ),
+              initialCameraPosition: state.initialPosition.toCameraPosition(),
+              onMapCreated: (AtlasController atlasController) {
+                _atlasController = atlasController;
+              },
             );
           },
         ),
       ),
     );
-  }
-
-  LatLng getCityCoordinates(City city) {
-    switch (city) {
-      case City.Lisbon:
-        return LisbonCoordinates;
-        break;
-      case City.SaoPaulo:
-        return SaoPauloCoordinates;
-        break;
-      case City.Tokyo:
-        return TokyoCoordinates;
-        break;
-      default:
-        return LisbonCoordinates;
-        break;
-    }
   }
 }

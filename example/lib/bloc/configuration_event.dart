@@ -8,3 +8,9 @@ class ChangeInitialPositionStarted extends ConfigurationEvent {
 
   ChangeInitialPositionStarted({this.city});
 }
+
+class ChangeCameraPositionStarted extends ConfigurationEvent {
+  final City city;
+
+  ChangeCameraPositionStarted({this.city});
+}

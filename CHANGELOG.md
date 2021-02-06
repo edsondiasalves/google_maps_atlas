@@ -7,7 +7,6 @@
 
 * Including example project
 * Exporting google_atlas correctly
-* Removing bloc from lib dependency
 
 # 1.0.0
 

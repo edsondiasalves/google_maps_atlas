@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_atlas_example/utils/constants.dart';
 import 'package:meta/meta.dart';
@@ -15,7 +16,14 @@ class ConfigurationBloc extends Bloc<ConfigurationEvent, ConfigurationState> {
     ConfigurationEvent event,
   ) async* {
     if (event is ChangeInitialPositionStarted) {
-      yield InitialPositionState(city: event.city);
+      yield InitialPositionState(
+        initialPosition: event.city,
+      );
+    } else if (event is ChangeCameraPositionStarted) {
+      yield CameraChangedState(
+        currentPosition: event.city,
+        initialPosition: state.initialPosition,
+      );
     }
   }
 }

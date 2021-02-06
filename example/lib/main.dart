@@ -2,10 +2,10 @@ import 'package:atlas/atlas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_atlas/google_atlas.dart';
-import 'package:google_maps_atlas_example/utils/constants.dart';
 import 'package:google_maps_atlas_example/widgets/settings_side_menu.dart';
 
 import 'bloc/configuration_bloc.dart';
+import 'utils/extensions.dart';
 
 void main() {
   AtlasProvider.instance = GoogleAtlas();
@@ -18,54 +18,43 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: BlocProvider(
         create: (BuildContext context) => ConfigurationBloc(),
-        child: GoogleAtlasSample(key: UniqueKey()),
+        child: GoogleAtlasSample(),
       ),
     );
   }
 }
 
 class GoogleAtlasSample extends StatelessWidget {
-  const GoogleAtlasSample({@required Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ConfigurationBloc, ConfigurationState>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Flutter Google Maps Provider'),
-          ),
-          drawer: SettingsSideMenu(),
-          body: BlocBuilder<ConfigurationBloc, ConfigurationState>(
-            builder: (context, state) {
-              return Atlas(
-                key: UniqueKey(),
-                initialCameraPosition: CameraPosition(
-                  target: getCityCoordinates(state.city),
-                  zoom: 13,
-                ),
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
+    AtlasController _atlasController;
 
-  LatLng getCityCoordinates(City city) {
-    switch (city) {
-      case City.Lisbon:
-        return LisbonCoordinates;
-        break;
-      case City.SaoPaulo:
-        return SaoPauloCoordinates;
-        break;
-      case City.Tokyo:
-        return TokyoCoordinates;
-        break;
-      default:
-        return LisbonCoordinates;
-        break;
-    }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Flutter Google Maps Provider'),
+      ),
+      drawer: SettingsSideMenu(),
+      body: BlocListener<ConfigurationBloc, ConfigurationState>(
+        listener: (context, state) {
+          if (state is CameraChangedState) {
+            _atlasController.moveCamera(
+              state.currentPosition.toCameraPosition(),
+            );
+          }
+        },
+        child: BlocBuilder<ConfigurationBloc, ConfigurationState>(
+          buildWhen: (previous, current) => current is InitialPositionState,
+          builder: (context, state) {
+            return Atlas(
+              key: UniqueKey(),
+              initialCameraPosition: state.initialPosition.toCameraPosition(),
+              onMapCreated: (AtlasController atlasController) {
+                _atlasController = atlasController;
+              },
+            );
+          },
+        ),
+      ),
+    );
   }
 }

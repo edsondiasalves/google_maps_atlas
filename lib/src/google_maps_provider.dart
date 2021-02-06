@@ -24,7 +24,7 @@ class _GoogleMapsProviderState extends State<GoogleMapsProvider> {
     return GoogleMap(
       initialCameraPosition: initialCameraPosition.toGoogleMapsCameraPosition(),
       onMapCreated: (GoogleMapController controller) {
-        widget.onMapCreated.call(
+        widget.onMapCreated?.call(
           GoogleAtlasController(controller: controller),
         );
       },

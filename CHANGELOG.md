@@ -1,3 +1,7 @@
+# 1.2.0
+
+* Implementing move camera
+
 # 1.1.1
 
 * Changing example structure folder

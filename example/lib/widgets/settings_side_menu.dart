@@ -62,7 +62,7 @@ class SettingsSideMenu extends StatelessWidget {
     return cities;
   }
 
-  Function(BuildContext, City) onChangeInitialPosition = (
+  final Function(BuildContext, City) onChangeInitialPosition = (
     BuildContext context,
     City value,
   ) {
@@ -71,7 +71,7 @@ class SettingsSideMenu extends StatelessWidget {
     );
   };
 
-  Function(BuildContext, City) onChangeCameraPosition = (
+  final Function(BuildContext, City) onChangeCameraPosition = (
     BuildContext context,
     City value,
   ) {

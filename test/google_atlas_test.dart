@@ -17,7 +17,7 @@ main() {
     );
   });
 
-  group('Google Atlas Provider', () {
+  group('Google Atlas', () {
     GoogleAtlas googleAtlas;
     CameraPosition initialCameraPosition;
 

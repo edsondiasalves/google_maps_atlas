@@ -4,10 +4,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart' as GoogleMaps;
 
 import 'utils.dart';
 
-class GoogleAtlasController implements AtlasController {
+class GoogleMapsAtlasController implements AtlasController {
   final GoogleMaps.GoogleMapController _controller;
 
-  GoogleAtlasController({@required GoogleMaps.GoogleMapController controller})
+  GoogleMapsAtlasController(
+      {@required GoogleMaps.GoogleMapController controller})
       : assert(controller != null),
         _controller = controller;
 

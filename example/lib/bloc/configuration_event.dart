@@ -4,13 +4,19 @@ part of 'configuration_bloc.dart';
 abstract class ConfigurationEvent {}
 
 class ChangeInitialPositionStarted extends ConfigurationEvent {
-  final City city;
+  final City initialCity;
 
-  ChangeInitialPositionStarted({this.city});
+  ChangeInitialPositionStarted({this.initialCity});
 }
 
 class ChangeCameraPositionStarted extends ConfigurationEvent {
-  final City city;
+  final City currentCity;
 
-  ChangeCameraPositionStarted({this.city});
+  ChangeCameraPositionStarted({this.currentCity});
+}
+
+class AddMarkersStarted extends ConfigurationEvent {
+  final MarkerPlace placePosition;
+
+  AddMarkersStarted({this.placePosition});
 }

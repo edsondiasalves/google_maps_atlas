@@ -1,3 +1,7 @@
+# 1.3.0
+
+* Implementing markers
+
 # 1.2.0
 
 * Implementing move camera

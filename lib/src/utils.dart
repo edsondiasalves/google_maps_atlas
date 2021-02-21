@@ -15,3 +15,25 @@ extension AtlasToGoogleCameraPosition on Atlas.CameraPosition {
     );
   }
 }
+
+extension AtlasToGoogleMarker on Atlas.Marker {
+  GoogleMaps.Marker toGoogleMapsMarkers() {
+    return GoogleMaps.Marker(
+      markerId: GoogleMaps.MarkerId(this.id),
+      position: this.position.toGoogleMapsLatLng(),
+    );
+  }
+}
+
+extension AtlasToGoogleSetMarkers on Set<Atlas.Marker> {
+  Set<GoogleMaps.Marker> toGoogleMapsSetMarkers() {
+    List<GoogleMaps.Marker> googleMapsMarkers = [];
+
+    this.forEach((Atlas.Marker atlasMarker) {
+      final markers = atlasMarker.toGoogleMapsMarkers();
+      googleMapsMarkers.add(markers);
+    });
+
+    return Set.from(googleMapsMarkers);
+  }
+}

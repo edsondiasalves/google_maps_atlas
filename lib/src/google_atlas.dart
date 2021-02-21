@@ -28,6 +28,7 @@ class GoogleAtlas extends Provider {
     return GoogleMapsProvider(
       initialCameraPosition: initialCameraPosition,
       onMapCreated: onMapCreated,
+      markers: markers,
     );
   }
 }

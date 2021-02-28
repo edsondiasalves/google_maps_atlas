@@ -31,10 +31,17 @@ class _GoogleMapsProviderState extends State<GoogleMapsProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return GoogleMap(
-      initialCameraPosition: initialCameraPosition.toGoogleMapsCameraPosition(),
-      onMapCreated: _onMapCreated,
-      markers: markers.toGoogleMapsSetMarkers(),
+    return FutureBuilder<Set<Marker>>(
+      future: markers.toGoogleMapsSetMarkers(),
+      initialData: Set<Marker>(),
+      builder: (context, snapshot) {
+        return GoogleMap(
+          initialCameraPosition:
+              initialCameraPosition.toGoogleMapsCameraPosition(),
+          onMapCreated: _onMapCreated,
+          markers: snapshot.data,
+        );
+      },
     );
   }
 

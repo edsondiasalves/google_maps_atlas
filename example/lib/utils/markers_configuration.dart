@@ -37,7 +37,10 @@ class ResultEngine {
 
   Set<Marker> _getNewYorkPizzaPlacesMarkers() {
     List<Marker> markers = [];
-    final String pizzaIcon = "";
+    final pizzaIcon = MarkerIcon(
+      assetName: 'assets/images/pizza.png',
+      width: 200,
+    );
 
     markers.add(
       Marker(
@@ -46,6 +49,7 @@ class ResultEngine {
           latitude: 40.71611489211848,
           longitude: -74.0081640104258,
         ),
+        icon: pizzaIcon,
       ),
     );
 
@@ -56,6 +60,7 @@ class ResultEngine {
           latitude: 40.739491715365226,
           longitude: -73.98499904931326,
         ),
+        icon: pizzaIcon,
       ),
     );
 
@@ -66,6 +71,7 @@ class ResultEngine {
           latitude: 40.6853547207549,
           longitude: -73.98943528883578,
         ),
+        icon: pizzaIcon,
       ),
     );
 
@@ -76,6 +82,7 @@ class ResultEngine {
           latitude: 40.71522249283857,
           longitude: -74.03987719217072,
         ),
+        icon: pizzaIcon,
       ),
     );
 
@@ -86,6 +93,7 @@ class ResultEngine {
           latitude: 40.77563760816105,
           longitude: -73.98058744624487,
         ),
+        icon: pizzaIcon,
       ),
     );
 
@@ -94,6 +102,10 @@ class ResultEngine {
 
   Set<Marker> _getLondonMuseumMarkers() {
     List<Marker> markers = [];
+    final museumIcon = MarkerIcon(
+      assetName: 'assets/images/museum.png',
+      width: 200,
+    );
 
     markers.add(
       Marker(
@@ -102,6 +114,7 @@ class ResultEngine {
           latitude: 51.50473100024499,
           longitude: -0.12901084925604245,
         ),
+        icon: museumIcon,
       ),
     );
 
@@ -112,6 +125,7 @@ class ResultEngine {
           latitude: 51.5208142608732,
           longitude: -0.09666175072613924,
         ),
+        icon: museumIcon,
       ),
     );
 
@@ -122,6 +136,7 @@ class ResultEngine {
           latitude: 51.499824415348776,
           longitude: -0.10981707614533068,
         ),
+        icon: museumIcon,
       ),
     );
 
@@ -132,6 +147,7 @@ class ResultEngine {
           latitude: 51.50318126244633,
           longitude: -0.08306530895701951,
         ),
+        icon: museumIcon,
       ),
     );
 
@@ -142,6 +158,7 @@ class ResultEngine {
           latitude: 51.504367474749614,
           longitude: -0.09831070789469158,
         ),
+        icon: museumIcon,
       ),
     );
 
@@ -150,6 +167,10 @@ class ResultEngine {
 
   Set<Marker> _getBeijingTempleMarkers() {
     List<Marker> markers = [];
+    final templeIcon = MarkerIcon(
+      assetName: 'assets/images/temple.png',
+      width: 200,
+    );
 
     markers.add(
       Marker(
@@ -158,6 +179,7 @@ class ResultEngine {
           latitude: 39.95450826446012,
           longitude: 116.41874689441009,
         ),
+        icon: templeIcon,
       ),
     );
 
@@ -168,6 +190,7 @@ class ResultEngine {
           latitude: 39.9187170148563,
           longitude: 116.42250872975887,
         ),
+        icon: templeIcon,
       ),
     );
 
@@ -178,6 +201,7 @@ class ResultEngine {
           latitude: 39.92112301224457,
           longitude: 116.44434313936556,
         ),
+        icon: templeIcon,
       ),
     );
 
@@ -188,6 +212,7 @@ class ResultEngine {
           latitude: 39.902540250987244,
           longitude: 116.39952352710203,
         ),
+        icon: templeIcon,
       ),
     );
 
@@ -198,6 +223,7 @@ class ResultEngine {
           latitude: 39.92507119951572,
           longitude: 116.39043847056215,
         ),
+        icon: templeIcon,
       ),
     );
 

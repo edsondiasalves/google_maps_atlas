@@ -19,21 +19,31 @@ class SettingsSideMenu extends StatelessWidget {
             builder: (context, state) {
               return Column(
                 children: [
-                  Container(
-                    child: Text('Initial Position'),
+                  _groupTitle(
+                    text: 'Initial Position',
+                    padding: EdgeInsets.only(bottom: 10),
                   ),
                   ..._buildCityList(
                     context: context,
-                    initialPosition: state.initialPosition,
+                    city: state.initialCity,
                     onChangeCity: onChangeInitialPosition,
                   ),
-                  Container(
-                    child: Text('Move Camera'),
+                  _groupTitle(
+                    text: 'Move Camera',
+                    padding: EdgeInsets.only(bottom: 10, top: 10),
                   ),
                   ..._buildCityList(
                     context: context,
-                    initialPosition: state.currentPosition,
+                    city: state.currentCity,
                     onChangeCity: onChangeCameraPosition,
+                  ),
+                  _groupTitle(
+                    text: 'Markers',
+                    padding: EdgeInsets.only(bottom: 10, top: 10),
+                  ),
+                  ..._buildMarkerPlaceList(
+                    context: context,
+                    placePosition: state.currentMarkersPlace,
                   ),
                 ],
               );
@@ -44,19 +54,33 @@ class SettingsSideMenu extends StatelessWidget {
     );
   }
 
+  Container _groupTitle({String text, EdgeInsets padding}) {
+    return Container(
+      child: Text(text, style: TextStyle(fontWeight: FontWeight.bold)),
+      padding: padding,
+    );
+  }
+
   List<Widget> _buildCityList({
     BuildContext context,
-    City initialPosition,
+    City city,
     Function(BuildContext, City) onChangeCity,
   }) {
     List<Widget> cities = [];
-    City.values.forEach((city) => {
-          cities.add(RadioListTile<City>(
-            title: Text(city.toString().split('.')[1]),
-            dense: true,
-            value: city,
-            groupValue: initialPosition,
-            onChanged: (City city) => onChangeCity(context, city),
+    City.values.forEach((cityValue) => {
+          cities.add(Container(
+            height: 35,
+            child: Row(
+              children: [
+                Radio(
+                  value: cityValue,
+                  groupValue: city,
+                  onChanged: (City selectedCity) =>
+                      onChangeCity(context, selectedCity),
+                ),
+                Text(cityValue.toString().split('.')[1]),
+              ],
+            ),
           ))
         });
     return cities;
@@ -67,7 +91,7 @@ class SettingsSideMenu extends StatelessWidget {
     City value,
   ) {
     BlocProvider.of<ConfigurationBloc>(context).add(
-      ChangeInitialPositionStarted(city: value),
+      ChangeInitialPositionStarted(initialCity: value),
     );
   };
 
@@ -76,7 +100,34 @@ class SettingsSideMenu extends StatelessWidget {
     City value,
   ) {
     BlocProvider.of<ConfigurationBloc>(context).add(
-      ChangeCameraPositionStarted(city: value),
+      ChangeCameraPositionStarted(currentCity: value),
     );
   };
+
+  List<Widget> _buildMarkerPlaceList({
+    BuildContext context,
+    MarkerPlace placePosition,
+  }) {
+    List<Widget> places = [];
+    MarkerPlace.values.forEach((place) => {
+          places.add(Container(
+            height: 35,
+            child: Row(
+              children: [
+                Radio(
+                  value: place,
+                  groupValue: placePosition,
+                  onChanged: (MarkerPlace place) {
+                    BlocProvider.of<ConfigurationBloc>(context).add(
+                      AddMarkersStarted(placePosition: place),
+                    );
+                  },
+                ),
+                Text(place.toString().split('.')[1]),
+              ],
+            ),
+          ))
+        });
+    return places;
+  }
 }

@@ -46,7 +46,12 @@ class GoogleMapsAtlasController implements AtlasController {
 
   @override
   Future<void> updateBounds(LatLngBounds bounds, double padding) {
-    throw UnimplementedError();
+    final boundingBoxPosition = GoogleMaps.CameraUpdate.newLatLngBounds(
+      bounds.toGoogleMapsLatLngBounds(),
+      padding,
+    );
+
+    return _controller.moveCamera(boundingBoxPosition);
   }
 
   @override

@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/edsondiasalves/google_maps_atlas/branch/main/graph/badge.svg?token=EJHHDWK3DR)](https://codecov.io/gh/edsondiasalves/google_maps_atlas)
+
 <h1>An Atlas map provided by Google</h1>
 
 ## Getting Started

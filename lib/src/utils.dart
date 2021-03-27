@@ -42,6 +42,15 @@ extension AtlasToGoogleSetMarkers on Set<Atlas.Marker> {
   }
 }
 
+extension AtlasToGoogleLatLngBounds on Atlas.LatLngBounds {
+  GoogleMaps.LatLngBounds toGoogleMapsLatLngBounds() {
+    return GoogleMaps.LatLngBounds(
+      northeast: this.northeast.toGoogleMapsLatLng(),
+      southwest: this.southwest.toGoogleMapsLatLng(),
+    );
+  }
+}
+
 Future<GoogleMaps.BitmapDescriptor> _markerToBitmapDescriptor(
   Atlas.MarkerIcon markerIcon,
 ) async {
